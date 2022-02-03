@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useBlogContext } from '../context/blog_context'
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom'
 
 export default function SingleQuestion() {
-
-    const { getQuestionById } = useBlogContext()
+    const { getQuestionById, getQuestion } = useBlogContext()
+    const [limit, setLimit] = useState(3)
+    const [questionList, setQuestionList] = useState([])
     const [question, setQuestion] = useState({})
     const { id } = useParams()
     useEffect(() => {
@@ -13,11 +14,18 @@ export default function SingleQuestion() {
             console.log(res)
             setQuestion(res.data.question)
         }
+        async function initQuestion() {
+            let res2 = await getQuestion({
+                limit: limit,
+            })
+            setQuestionList(res2.data.questions)
+        }
         fetchData()
+        initQuestion()
     }, [])
     return (
         <>
-            <div id="breadcrumb" dir='rtl'>
+            <div id="breadcrumb" dir="rtl">
                 <div class="container">
                     <ul>
                         <li>
@@ -39,42 +47,75 @@ export default function SingleQuestion() {
                             <div class="postmeta"></div>
                             <div class="post-content">
                                 <div class="singlebox">
+                                    <div class="user-icon">
+                                        <img
+                                            src="/assets/img/User-avatar.png"
+                                            width={20}
+                                            alt=""
+                                        />
+                                        <strong>
+                                            <p>مستخدم أفكونسلت</p>
+                                        </strong>
+                                    </div>
+
                                     <p>{question.content}</p>
                                 </div>
                                 <div class="avo-reponse">
-                                    <p>
-                                        {' '}
-                                        تمت الإجابة على هذا السؤال من قبل:{' '}
-                                        <a href=""> lawyer</a>
-                                    </p>
+                                    <h5>الإجابات المقترحة</h5>
                                 </div>
-                                    {
-                                    !question.answers ? null :question.answers.map((answer , index)=>
-                                <div class="singlebox">
-                                    <p>
-                                    { answer.text ||null}
-                                    </p>
-                                </div>
-                                    )}
+                                {!question.answers
+                                    ? null
+                                    : question.answers.map((answer, index) => (
+                                          <div class="singlebox">
+                                              <div class="user-icon">
+                                                  <img
+                                                      src="/assets/img/User-avatar.png"
+                                                      width={20}
+                                                      alt=""
+                                                  />
+                                                  <strong>
+                                                      {!answer.user ? "أفكونسلت" : answer.user}
+                                                  </strong>
+                                              </div>
+                                              <p>{answer.text || null}</p>
+                                          </div>
+                                      ))}
                             </div>
                         </div>
-                        
                     </div>
-                    <aside class="col-lg-3" dir='rtl'>
-                    <div class="widget">
+                    <aside class="col-lg-3" dir="rtl">
+                        <div class="widget">
                             <div class="widget-title">
                                 <h4>أحدث استشارة قانونية</h4>
                             </div>
 
-                            <ul class="comments-list">
-                                <li href="">
-                                    <div class="alignleft">
-                                        <img src="/assets/img/question-mark-icon-help-symbol-260nw-400447213.jpg"
-                                  alt="" />
-                                    </div>
-                                    <small></small>
-                                    <h3>titre</h3>
-                                </li>
+                            <ul class="comments-list blogpointer">
+                                {questionList.map((item, index) => (
+                                    <li>
+                                        <div class="alignleft">
+                                            <a
+                                                href={`/استشارات-قانونية/${item.title.replace(
+                                                    /[^A-Z0-9]/gi,
+                                                    '-'
+                                                )}/${item.id}`}
+                                            >
+                                                <img
+                                                    src="/assets/img/question-mark-icon-help-symbol-260nw-400447213.jpg"
+                                                    alt=""
+                                                />
+                                            </a>
+                                        </div>
+                                        <small></small>
+                                        <a
+                                            href={`/استشارات-قانونية/${item.title.replace(
+                                                /[^A-Z0-9]/gi,
+                                                '-'
+                                            )}/${item.id}`}
+                                        >
+                                            <h3>{item.title}</h3>
+                                        </a>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </aside>

@@ -12,10 +12,10 @@ export default function HomeQuestion(props) {
         )
     }
     return (
-        <div class="col-md-4">
+        <div onClick={handleClick} class="col-md-4 blogpointer">
             <div class="about-review">
                 <div class="rating">
-                   <a onClick={handleClick}  ><h4>{props.question.title}</h4></a>
+                   <h4>{props.question.title}</h4>
                 </div>
 
                 <p>

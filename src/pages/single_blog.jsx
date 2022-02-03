@@ -99,7 +99,8 @@ export default function SingleBlog() {
                                   <img src={'img/' + item.image} alt="" />
                               </div>
                               <div class="text-right">
-                              <h3>{item.title}</h3>
+                                  <a href={`/المجلة-القانونية/${item.title.replace(/[!? ]/ig, "-")}/${item.id}`}><h3>{item.title}</h3></a>
+                              
                               <small>{!blog.createdAt?null:item.createdAt.slice(0, 10)}</small>
                               </div>
                           </li>

@@ -19,8 +19,9 @@ export default function Post(props) {
                     <div class="row no-gutters">
                         <div class="col-lg-7">
                             <figure>
-                                <a href=""></a>
+                                <a onClick={handleClick}>
                                 <img src={'img/' + props.blog.image} alt="" />
+                                </a>
                             </figure>
                         </div>
                         <div class="col-lg-5">
