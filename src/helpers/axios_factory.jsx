@@ -11,10 +11,8 @@ export default async function axiosFactory({
   data,
   isFake = false,
 }) {
-
   const header = getHeader(url, method, data);
   const urlToUse = isFake ? url : process.env.REACT_APP_BASE_URL + url;
-  console.log(urlToUse);
   let response;
   try {
     switch (method) {

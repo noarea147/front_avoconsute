@@ -9,12 +9,12 @@ export default function Lawyer(props) {
         <div>
             <div class="strip_list" dir="rtl">
                 <figure>
-                    <img src="assets/images/avatar.png" alt="name" />
+                    <img src="assets/images/avatar.png" alt="name" onClick={handleClick} />
                 </figure>
 
-                <small>{props.lawyer.nameInFrench}</small>
+                <small onClick={handleClick}>{props.lawyer.nameInFrench}</small>
                 <span>
-                    <a href="">{props.lawyer.nameInArabic}</a>
+                    <a onClick={handleClick}>{props.lawyer.nameInArabic}</a>
                 </span>
 
                 <ul>

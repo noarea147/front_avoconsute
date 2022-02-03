@@ -10,11 +10,7 @@ export default function Post(props) {
             props.blog.body.indexOf('</p>') + 4
         )
     function handleClick() {
-        navigate(
-            `/المجلة-القانونية/${props.blog.title.replace(/ /g, '-')}/${
-                props.blog.id
-            }`
-        )
+        navigate(`/المجلة-القانونية/${props.blog.title.replace(/[^A-Z0-9]/ig, "-")}/${props.blog.id}`)
     }
     return (
         <div class="col-lg-9">

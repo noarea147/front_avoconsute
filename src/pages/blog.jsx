@@ -18,7 +18,8 @@ export default function Blog() {
             let res = await getBlogs({
                 limit: limit,
             })
-			console.log(res.data.blogs);
+            console.log(res.data.blogs)
+
             setBlogList(res.data.blogs)
         }
         initBlogs()
@@ -34,9 +35,10 @@ export default function Blog() {
                         </li>
                         <li>المجلة القانونية</li>
                     </ul>
+                    <br></br>
                 </div>
             </div>
-            <div class="container margin_60" dir="rtl">
+            <div class="container" dir="rtl">
                 <div class="main_title">
                     <h1>
                         المجلة<strong>القانونية</strong>
@@ -46,20 +48,21 @@ export default function Blog() {
                         وجميع الأخبار الحالية
                     </h2>
                 </div>
-                <div class="row">
-                    {blogList !== null 
+
+                <div class="row  ">
+                    {blogList !== null
                         ? blogList.map((item, index) => {
                               return <Post blog={item} />
                           })
                         : null}
-
                 </div>
-				<center>
-                        <p class="btn_1 medium" onClick={viewMore}>
-                            تحميل المزيد
-                        </p>
-                    </center>
-                <aside class="col-lg-3">
+                <center>
+                    <p class="btn_1 medium" onClick={viewMore}>
+                        تحميل المزيد
+                    </p>
+                </center>
+				<br></br>
+                {/* <aside class="col-lg-3">
                     <div class="widget"></div>
 
                     <div class="widget">
@@ -83,7 +86,7 @@ export default function Blog() {
                             </li>
                         </ul>
                     </div>
-                </aside>
+                </aside> */}
             </div>
         </>
     )
