@@ -62,8 +62,8 @@ export default function SingleBlog() {
                                         </a>
                                     </li>
                                     <li>
-                                        <p>
-                                            <i class="icon_clock_alt"></i>{!blog.createdAt?null:blog.createdAt.slice(0, 10)}
+                                        <p>التاريخ : 
+                                            <i class="icon_clock_alt"></i>{!blog.createdAt?null:" " + blog.createdAt.slice(0, 10)}
                                         </p>
                                     </li>
                                     <li>

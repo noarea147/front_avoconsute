@@ -33,6 +33,7 @@ export default function Question() {
                             <a href="/">الصفحة الرئيسية</a>
                         </li>
                     </ul>
+                    <br></br>
                 </div>
             </div>
             <div class="bg_color_1">

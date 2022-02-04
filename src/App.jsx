@@ -3,6 +3,7 @@ import Home from './pages/home'
 import Blog from './pages/blog'
 import AboutUs from './pages/aboutus'
 import Lawyers from './pages/lawyers'
+import Terms from './pages/terms'
 import LawyerProfile from './pages/lawyer_profile'
 import ContactUs from './pages/contactus'
 import SingleQuestion from './pages/single_question'
@@ -14,6 +15,7 @@ import {
     url_aboutus,
     url_contactus,
     url_lawyer,
+    url_terms,
 } from './helpers/Url_string_manager'
 
 import LawyerProvider from './context/lawyer_context'
@@ -56,12 +58,16 @@ export default function App() {
                         </BlogProvider>
                     }
                 />
-                <Route path={url_question + '/:title/:id'} element={
-                    <BlogProvider>
-                <SingleQuestion />
-                </BlogProvider>
-                } />
+                <Route
+                    path={url_question + '/:title/:id'}
+                    element={
+                        <BlogProvider>
+                            <SingleQuestion />
+                        </BlogProvider>
+                    }
+                />
                 <Route path={url_aboutus} element={<AboutUs />} />
+                <Route path={url_terms} element={<Terms />} />
                 <Route path={url_contactus} element={<ContactUs />} />
                 <Route
                     path={url_lawyer + '/:name/:id'}
@@ -74,6 +80,14 @@ export default function App() {
 
                 <Route
                     path={url_lawyers}
+                    element={
+                        <LawyerProvider>
+                            <Lawyers />
+                        </LawyerProvider>
+                    }
+                />
+                <Route
+                    path={url_lawyers+ '/:state'}
                     element={
                         <LawyerProvider>
                             <Lawyers />

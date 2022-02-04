@@ -40,6 +40,8 @@ export default function Blog() {
             </div>
             <div class="container" dir="rtl">
                 <div class="main_title">
+					<br></br>
+					<br></br>
                     <h1>
                         المجلة<strong>القانونية</strong>
                     </h1>

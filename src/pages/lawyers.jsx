@@ -6,6 +6,7 @@ export default function Lawyers() {
     const { getLawyers } = useLawyerContext();
     const [limit, setLimit] = useState(10);
     const [lawerList, setLawerList] = useState([])
+    const { state } = useParams()
     async function viewMore() {
         let res = await getLawyers({
             limit:limit+10,
@@ -31,9 +32,9 @@ export default function Lawyers() {
                 <div class="container margin_120_95">
                     <div class="main_title_2">
                         <h1>
-                            ارقام هواتف
-                            <strong>محامين</strong>
-                            في تونس
+                             ارقام هواتف
+                            <strong> محامين </strong>
+                            في تونس  
                         </h1>
                         <p>
                             ابحث على أفضل المحامين في تونس واحجز موعدك عبر
@@ -96,6 +97,7 @@ export default function Lawyers() {
                                             <option value="" selected disabled>
                                                 الولاية
                                             </option>
+                                            {!state ? null : <option selected value={state}>{state}</option>}
                                             <option value="تونس">تونس</option>
                                             <option value="أريانة">
                                                 أريانة

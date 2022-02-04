@@ -111,7 +111,7 @@ export default function Home() {
                         </form>
                     </div>
                 </div>
-                <div id="app_section">
+                {/* <div id="app_section">
                     <div class="container">
                         <div class="row justify-content-around">
                             <div class="col-md-6 text-right">
@@ -134,7 +134,7 @@ export default function Home() {
                                     <br></br>انشئ حساباً الآن
                                 </p>
                                 <div
-                                    class="app_buttons wow animated"
+                                    class="app_buttons"
                                     data-wow-offset="100"
                                 >
                                     <a
@@ -165,9 +165,9 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div class="bg_color">
-                    <div class="container margin_120_95">
+                    {/* <div class="container margin_120_95">
                         <div class="row add_bottom_30">
                             <div class="col-lg-8">
                                 <div class="box_feat2">
@@ -196,7 +196,7 @@ export default function Home() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div class="container margin_120_95">
                         <div class="main_title">

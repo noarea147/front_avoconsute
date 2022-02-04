@@ -378,6 +378,7 @@ p.lead {
     font-weight: 300;
     font-size: 20px;
     font-size: 1.25rem;
+    margin-bottom: 10px!important;
 }
 
 strong {
@@ -660,6 +661,7 @@ a.btn_11,
     background: #222222;
     cursor: pointer;
     padding: 7px 20px;
+    margin: 10px;
     display: inline-block;
     outline: none;
     font-size: 14px;

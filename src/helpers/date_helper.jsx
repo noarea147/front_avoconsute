@@ -7,6 +7,6 @@ export default function formatDate(date) {
     let day = `${date.getDate()}`;
     let month = `${date.getMonth() + 1}`;
     let year = `${date.getFullYear()}`;
-    date = month + '/' + day + '/' + year;
+    date = day + '/' + month + '/' + year;
     return date;
 }

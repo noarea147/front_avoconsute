@@ -369,6 +369,7 @@ article.blog .post_info ul li:last-child {
 
 .postmeta ul {
     margin-bottom: 10px;
+    margin-right: -50px;
 }
 
 .postmeta ul li {
