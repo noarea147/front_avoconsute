@@ -51,13 +51,8 @@ export default function Home() {
                         <form method="POST" action="/محامون/">
                             <div id="custom-search-input">
                                 <div class="input-group">
-                                    <select
-                                        name="Gouvernorat"
-                                        id="GouvernoratAr"
-                                        class="search-drop"
-                                        value=""
-                                        required
-                                    >
+                                    <select name="Gouvernorat" id="GouvernoratAr" class="search-drop" value=""
+                                        required>
                                         <option value="">الولاية</option>
                                         <option value="تونس">تونس</option>
                                         <option value="أريانة">أريانة</option>
