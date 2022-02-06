@@ -87,7 +87,7 @@ export default function App() {
                     }
                 />
                 <Route
-                    path={url_lawyers+ '/:state'}
+                    path={url_lawyers+ '/:filter'}
                     element={
                         <LawyerProvider>
                             <Lawyers />

@@ -15,17 +15,15 @@ export default function Home() {
                 limit: limit,
             })
 
-            
             setBlogList(res.data.blogs)
         }
-		async function initQuestion() {
-			let res2 = await getQuestion({
-				limit: limit,
-			})
-			setQuestionList(res2.data.questions)
-
-		}
-		initQuestion()
+        async function initQuestion() {
+            let res2 = await getQuestion({
+                limit: limit,
+            })
+            setQuestionList(res2.data.questions)
+        }
+        initQuestion()
         initBlogs()
     }, [])
 
@@ -41,13 +39,8 @@ export default function Home() {
                         <form method="POST" action="/محامون/">
                             <div id="custom-search-input">
                                 <div class="input-group">
-                                    <select
-                                        name="Gouvernorat"
-                                        id="GouvernoratAr"
-                                        class="search-drop"
-                                        value=""
-                                        required
-                                    >
+                                    <select name="Gouvernorat" id="GouvernoratAr" class="search-drop" value=""
+                                        required>
                                         <option value="">الولاية</option>
                                         <option value="تونس">تونس</option>
                                         <option value="أريانة">أريانة</option>
@@ -286,9 +279,8 @@ export default function Home() {
                         </div>
                         <div class="row">
                             {questionList.map((item, index) => {
-                                      return <QuestionHome question={item} />
-                                  })
-                                }
+                                return <QuestionHome question={item} />
+                            })}
                         </div>
                         <p class="text-center add_top_30">
                             <a href="/استشارات-قانونية/" class="btn_1 medium">

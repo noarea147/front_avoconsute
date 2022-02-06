@@ -1,28 +1,44 @@
 import React, { useEffect, useState } from 'react'
 import Lawyer from '../shared/component/lawyer'
 import { useLawyerContext } from '../context/lawyer_context'
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom'
 export default function Lawyers() {
-    const { getLawyers } = useLawyerContext();
-    const [limit, setLimit] = useState(10);
+    const { getLawyers, getLawyersByFilter } = useLawyerContext()
+    const [limit, setLimit] = useState(10)
     const [lawerList, setLawerList] = useState([])
-    const { state } = useParams()
+    const { filter } = useParams()
     async function viewMore() {
-        let res = await getLawyers({
-            limit:limit+10,
-        });
-        setLimit(limit+10);
-        setLawerList(res.data.lawyers);
+        let res = filter
+            ? await getLawyersByFilter({
+                  limit: limit + 10,
+                  filters: {
+                      stateInArabic: filter,
+                  },
+              })
+            : await getLawyers({ limit: limit + 10 })
+        setLimit(limit + 10)
+        setLawerList(res.data.lawyers)
     }
-    
+
     useEffect(() => {
-       async function initLawyers(){
+        async function allLawyers() {
             let res = await getLawyers({
-                limit:limit,
-            });
-            setLawerList(res.data.lawyers);
+                limit: limit,
+            })
+            setLawerList(res.data.lawyers)
         }
-        initLawyers();
+        async function byFilter() {
+            let res = await getLawyersByFilter({
+                limit: limit,
+                filters: {
+                    stateInArabic: filter,
+                },
+            })
+
+            setLawerList(res.data.lawyers)
+            console.log(res)
+        }
+        filter ? byFilter() : allLawyers()
     }, [])
 
     return (
@@ -32,9 +48,9 @@ export default function Lawyers() {
                 <div class="container margin_120_95">
                     <div class="main_title_2">
                         <h1>
-                             ارقام هواتف
+                            ارقام هواتف
                             <strong> محامين </strong>
-                            في تونس  
+                            في تونس
                         </h1>
                         <p>
                             ابحث على أفضل المحامين في تونس واحجز موعدك عبر
@@ -97,7 +113,11 @@ export default function Lawyers() {
                                             <option value="" selected disabled>
                                                 الولاية
                                             </option>
-                                            {!state ? null : <option selected value={state}>{state}</option>}
+                                            {!filter ? null : (
+                                                <option selected value={filter}>
+                                                    {filter}
+                                                </option>
+                                            )}
                                             <option value="تونس">تونس</option>
                                             <option value="أريانة">
                                                 أريانة
@@ -160,7 +180,9 @@ export default function Lawyers() {
             </div>
 
             <center>
-                <p class="btn_1 medium" onClick={viewMore}>تحميل المزيد</p>
+                <p class="btn_1 medium" onClick={viewMore}>
+                    تحميل المزيد
+                </p>
             </center>
         </>
     )
