@@ -8,6 +8,18 @@ export default function Home() {
     const [limit, setLimit] = useState(3)
     const [blogList, setBlogList] = useState([])
     const [questionList, setQuestionList] = useState([])
+    const [searchObject, setSearchObject] = useState()
+    function handleSearchObjectChange({ state, lawyerName }) {
+        let temp = {}
+        if (state) {
+            temp.stateInArabic = state
+        }
+        if (lawyerName) {
+            temp.nameInArabic = lawyerName
+        }
+
+        setSearchObject({ filters: temp })
+    }
 
     useEffect(() => {
         async function initBlogs() {
@@ -15,17 +27,15 @@ export default function Home() {
                 limit: limit,
             })
 
-            
             setBlogList(res.data.blogs)
         }
-		async function initQuestion() {
-			let res2 = await getQuestion({
-				limit: limit,
-			})
-			setQuestionList(res2.data.questions)
-
-		}
-		initQuestion()
+        async function initQuestion() {
+            let res2 = await getQuestion({
+                limit: limit,
+            })
+            setQuestionList(res2.data.questions)
+        }
+        initQuestion()
         initBlogs()
     }, [])
 
@@ -286,9 +296,8 @@ export default function Home() {
                         </div>
                         <div class="row">
                             {questionList.map((item, index) => {
-                                      return <QuestionHome question={item} />
-                                  })
-                                }
+                                return <QuestionHome question={item} />
+                            })}
                         </div>
                         <p class="text-center add_top_30">
                             <a href="/استشارات-قانونية/" class="btn_1 medium">
