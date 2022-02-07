@@ -21,6 +21,7 @@ import {
 import LawyerProvider from './context/lawyer_context'
 import BlogProvider from './context/blog_context'
 import SingleBlog from './pages/single_blog'
+import SearchProvider from './context/search_context'
 export default function App() {
     return (
         <Router>
@@ -28,9 +29,11 @@ export default function App() {
                 <Route
                     path="/"
                     element={
-                        <BlogProvider>
-                            <Home />
-                        </BlogProvider>
+                        <SearchProvider>
+                            <BlogProvider>
+                                <Home />
+                            </BlogProvider>
+                        </SearchProvider>
                     }
                 />
                 <Route
@@ -87,7 +90,7 @@ export default function App() {
                     }
                 />
                 <Route
-                    path={url_lawyers+ '/:filter'}
+                    path={url_lawyers + '/:filter'}
                     element={
                         <LawyerProvider>
                             <Lawyers />

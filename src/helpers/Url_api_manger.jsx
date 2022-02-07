@@ -4,4 +4,5 @@ export const GET_LAWYER = 'lawyer/all',
     GET_BLOGS = 'blog/all/published',
     GET_BLOG_BY_ID = 'blog/by-id',
     GET_QUESTIONS = 'question/all/published',
-    GET_QUESTION_BY_ID = 'question/by-id'
+    GET_QUESTION_BY_ID = 'question/by-id',
+    SEARCH = ''

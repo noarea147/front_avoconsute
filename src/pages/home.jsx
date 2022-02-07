@@ -2,25 +2,36 @@ import React, { useState, useEffect } from 'react'
 import PostHome from '../shared/component/home_post'
 import QuestionHome from '../shared/component/home_question'
 import { useBlogContext } from '../context/blog_context'
+import { useSearchContext } from '../context/search_context'
 
 export default function Home() {
     const { getBlogs, getQuestion } = useBlogContext()
+    const { search } = useSearchContext()
     const [limit, setLimit] = useState(3)
     const [blogList, setBlogList] = useState([])
     const [questionList, setQuestionList] = useState([])
-    const [searchObject, setSearchObject] = useState()
-    function handleSearchObjectChange({ state, lawyerName }) {
-        let temp = {}
-        if (state) {
-            temp.stateInArabic = state
-        }
-        if (lawyerName) {
-            temp.nameInArabic = lawyerName
-        }
+    const [state, setState] = useState()
+    const [name, setName] = useState()
 
-        setSearchObject({ filters: temp })
+    async function searchWithMultipleParams() {
+        const { data } = await search({
+            filters: [
+                {
+                    stateInArabic: state,
+                },
+                {
+                    nameInArabic: name,
+                    stateInArabic: state,
+                },
+
+                {
+                    nameInFrench: name,
+                    stateInArabic: state,
+                },
+            ],
+        })
+        setBlogList(data.data)
     }
-
     useEffect(() => {
         async function initBlogs() {
             let res = await getBlogs({
@@ -51,8 +62,17 @@ export default function Home() {
                         <form method="POST" action="/محامون/">
                             <div id="custom-search-input">
                                 <div class="input-group">
-                                    <select name="Gouvernorat" id="GouvernoratAr" class="search-drop" value=""
-                                        required>
+                                    <select
+                                        name="Gouvernorat"
+                                        id="GouvernoratAr"
+                                        class="search-drop"
+                                        value=""
+                                        onChange={(e) => {
+                                            console.log(e.target.value)
+                                            setState(e.target.value)
+                                        }}
+                                        required
+                                    >
                                         <option value="">الولاية</option>
                                         <option value="تونس">تونس</option>
                                         <option value="أريانة">أريانة</option>
@@ -104,6 +124,10 @@ export default function Home() {
                                         name="key"
                                         type="text"
                                         class=" search-bar input-group"
+                                        onChange={(e) => {
+                                            console.log(e.target.value)
+                                            setName(e.target.value)
+                                        }}
                                         placeholder=" إسم المحامي ..."
                                     />
                                     <input
