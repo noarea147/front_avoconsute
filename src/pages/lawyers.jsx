@@ -3,6 +3,7 @@ import Lawyer from '../shared/component/lawyer'
 import { useLawyerContext } from '../context/lawyer_context'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import {Helmet} from "react-helmet";
 export default function Lawyers() {
     const navigate = useNavigate()
     const { getLawyers, getLawyersByFilter } = useLawyerContext()
@@ -116,6 +117,59 @@ export default function Lawyers() {
 
     return (
         <>
+        <Helmet>
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+                />
+                <meta
+                    name="description"
+                    content="اعثر بسرعة على محامٍ بالقرب منك وحدد موعدًا مجانًا عبر الإنترنت ببضع نقرات - دليل المحامين التونسيين AvoConsulte.com"
+                />
+                <title>
+                    AvoConsulte ابحث واعثر على أفضل محام في تونس - قائمة
+                    المحامين {params.state}
+                </title>
+                <meta
+                    name="keywords"
+                    content="جدول المحامين بتونس, جدول المحامين, ارقام هواتف محامين في تونس, محامي, 
+onat, onat tunisie, ordre des avocats, ordre national des avocats, الفرع الجهوي للمحامين بتونس ,المحاماة , ارقام هواتف محامين في تونس ,استشارات قانونية عقارية تونس , نور الدين بن عياد 
+,استشارات قانونية في الطلاق تونس ,  avocats , avocat , Avocat Tunisie , Avocat En Tunisie ,
+ Palais de justice Tunis , Avocat Tunisien ,Avocats Tunis ,ordre des avocats Tunisien ,Cabinet D'avocat,
+محامون ، محامي ، محام تونسي ، محامي تونس ، محكمة تونس ، محامي تونسي ، محامون تونس 
+، نقابة المحامين التونسية 
+، ديوان دافو ,جدول المحامين بتونس, جدول المحامين, ارقام هواتف محامين في تونس, محامي,دليل المحامين التونسيين"
+                />
+                <meta
+                    property="og:url"
+                    content="https://www.avoconsulte.com/"
+                />
+                <meta property="og:type" content="website" />
+                <meta
+                    property="og:title"
+                    content="ابحث واعثر على أفضل محام في تونس واحجز موعدك عبر الإنترنت - دليل المحامين التونسيين - دليل المحامين التونسيين"
+                />
+                <meta
+                    property="og:image"
+                    content="https://www.avoconsulte.com/img/avoconsulte_com_logo.png"
+                />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta property="twitter:domain" content="avoconsulte.com" />
+                <meta
+                    property="twitter:url"
+                    content="https://www.avoconsulte.com/"
+                />
+                <meta
+                    name="twitter:title"
+                    content="ابحث واعثر على أفضل محام في تونس واحجز موعدك عبر الإنترنت "
+                />
+                <meta
+                    name="twitter:image"
+                    content="https://www.avoconsulte.com/img/avoconsulte_com_logo.png"
+                />
+                <meta name="author" content="Avoconsulte" />{' '}
+            </Helmet>
             <div>
                 <div id="results"></div>
                 <div class="container margin_120_95">
@@ -123,7 +177,7 @@ export default function Lawyers() {
                         <h1>
                             ارقام هواتف
                             <strong> محامين </strong>
-                            في تونس
+                            في {state}
                         </h1>
                         <p>
                             ابحث على أفضل المحامين في تونس واحجز موعدك عبر
