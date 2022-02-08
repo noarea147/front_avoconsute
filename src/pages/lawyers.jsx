@@ -4,36 +4,40 @@ import { useLawyerContext } from '../context/lawyer_context'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 export default function Lawyers() {
-    const [state, setState] = useState([])
     const navigate = useNavigate()
     const { getLawyers, getLawyersByFilter } = useLawyerContext()
     const [limit, setLimit] = useState(10)
     const [lawerList, setLawerList] = useState([])
-    const { filter } = useParams()
-    // async function searchHandler() {
-    //     let res = await getLawyersByFilter({
-    //         limit: limit,
-    //         filters: [
-    //             {
-    //                 stateInArabic: filter,
-    //             },
-    //         ],
-    //     })
+    const params = useParams()
+    const [state, setState] = useState(params.state)
+    const [lawyerName, setlawyerName] = useState(params.LawyerName)
 
-    //     setLawerList(res.data.lawyers)
-    //     navigate('/محامون/' + state)
-    // }
     async function viewMore() {
-        let res = filter
-            ? await getLawyersByFilter({
-                  limit: limit + 10,
-                  filters: [
-                      {
-                          stateInArabic: filter,
-                      },
-                  ],
-              })
-            : await getLawyers({ limit: limit + 10 })
+        let filter = {
+            limit: limit,
+            filters: [
+                {
+                    stateInArabic: state,
+                },
+            ],
+        }
+        if (lawyerName) {
+            filter = {
+                limit: limit,
+                filters: [
+                    {
+                        stateInArabic: state,
+                        nameInFrench: { $regex: `^${lawyerName}` },
+                    },
+                    {
+                        stateInArabic: state,
+                        nameInArabic: { $regex: `^${lawyerName}` },
+                    },
+                ],
+            }
+        }
+        let res = await getLawyersByFilter(filter)
+
         setLimit(limit + 10)
         setLawerList(res.data.lawyers)
     }
@@ -46,18 +50,39 @@ export default function Lawyers() {
             setLawerList(res.data.lawyers)
         }
         async function byFilter() {
-            let res = await getLawyersByFilter({
+            let filter = {
                 limit: limit,
                 filters: [
                     {
-                        stateInArabic: filter,
+                        stateInArabic: params.state,
                     },
                 ],
-            })
-
+            }
+            if (
+                params.name !== null &&
+                params.name !== undefined &&
+                params.name !== ''
+            ) {
+                filter = {
+                    limit: limit,
+                    filters: [
+                        {
+                            stateInArabic: params.state,
+                            nameInFrench: { $regex: `^${params.name}` },
+                        },
+                        {
+                            stateInArabic: params.state,
+                            nameInArabic: { $regex: `^${params.name}` },
+                        },
+                    ],
+                }
+            }
+            console.log(filter)
+            let res = await getLawyersByFilter(filter)
+            console.log('hani hneeeeeeeeeeee')
             setLawerList(res.data.lawyers)
         }
-        filter ? byFilter() : allLawyers()
+        params.state ? byFilter() : allLawyers()
     }, [])
 
     return (
@@ -85,6 +110,7 @@ export default function Lawyers() {
                             return <Lawyer lawyer={item} />
                         })}
                     </div>
+
                     <div class="col-lg-4 col-sm-12 in-form">
                         <div class="row">
                             <div id="custom-search-input">
@@ -132,11 +158,11 @@ export default function Lawyers() {
                                         <option value="" selected disabled>
                                             الولاية
                                         </option>
-                                        {!filter ? null : (
+                                        {/* {!filter ? null : (
                                             <option selected value={filter}>
                                                 {filter}
                                             </option>
-                                        )}
+                                        )} */}
                                         <option value="تونس">تونس</option>
                                         <option value="أريانة">أريانة</option>
                                         <option value="بن عروس">بن عروس</option>

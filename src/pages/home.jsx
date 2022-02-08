@@ -4,7 +4,7 @@ import QuestionHome from '../shared/component/home_question'
 import { useBlogContext } from '../context/blog_context'
 import { useSearchContext } from '../context/search_context'
 import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { url_lawyers } from '../helpers/Url_string_manager'
 
 export default function Home() {
     const navigate = useNavigate()
@@ -18,12 +18,7 @@ export default function Home() {
     const [homeLawyerList, setHomeLawyerList] = useState([])
 
     function handlerSearch() {
-        state
-            ? navigate('محامون/' + state, {
-                  homestate: state,
-                  homelawyerlist: homeLawyerList,
-              })
-            : alert('لم يتم تحديدالولاية المحامي')
+        navigate(`/محامون/${state}/${name}`)
     }
 
     // async function searchWithMultipleParams() {
@@ -102,7 +97,7 @@ export default function Home() {
                                     <option value="القيروان">القيروان</option>
                                     <option value="القصرين">القصرين</option>
                                     <option value="الكاف">الكاف</option>
-                                    <option value="منستير">منستير</option>
+                                    <option value="المنستير">المنستير</option>
                                     <option value="نابل">نابل</option>
                                     <option value="سيدي بوزيد">
                                         سيدي بوزيد

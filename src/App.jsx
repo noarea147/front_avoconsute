@@ -82,7 +82,7 @@ export default function App() {
                 />
 
                 <Route
-                    path={url_lawyers}
+                    path={url_lawyers + '/:state/:name'}
                     element={
                         <LawyerProvider>
                             <Lawyers />
@@ -90,7 +90,15 @@ export default function App() {
                     }
                 />
                 <Route
-                    path={url_lawyers + '/:filter'}
+                    path={url_lawyers + '/:state'}
+                    element={
+                        <LawyerProvider>
+                            <Lawyers />
+                        </LawyerProvider>
+                    }
+                />
+                <Route
+                    path={url_lawyers}
                     element={
                         <LawyerProvider>
                             <Lawyers />
