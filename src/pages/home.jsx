@@ -15,10 +15,11 @@ export default function Home() {
     const [questionList, setQuestionList] = useState([])
     const [state, setState] = useState()
     const [name, setName] = useState()
-    const [homeLawyerList, setHomeLawyerList] = useState([])
 
     function handlerSearch() {
-        navigate(`/محامون/${state}/${name}`)
+        name
+            ? navigate(`/محامون/${state}/${name}`)
+            : navigate(`/محامون/${state}`)
     }
 
     // async function searchWithMultipleParams() {
@@ -130,7 +131,6 @@ export default function Home() {
                                     type="text"
                                     class="search-bar input-group"
                                     onChange={(e) => {
-                                        console.log(e.target.value)
                                         setName(e.target.value)
                                     }}
                                     placeholder=" إسم المحامي"

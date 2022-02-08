@@ -27,11 +27,11 @@ export default function Lawyers() {
                 filters: [
                     {
                         stateInArabic: state,
-                        nameInFrench: { $regex: `^${lawyerName}` },
+                        nameInFrench: { $regex: `${lawyerName}` },
                     },
                     {
                         stateInArabic: state,
-                        nameInArabic: { $regex: `^${lawyerName}` },
+                        nameInArabic: { $regex: `${lawyerName}` },
                     },
                 ],
             }
@@ -40,6 +40,36 @@ export default function Lawyers() {
 
         setLimit(limit + 10)
         setLawerList(res.data.lawyers)
+    }
+    async function search() {
+        let filter = {
+            limit: limit,
+            filters: [
+                {
+                    stateInArabic: state,
+                },
+            ],
+        }
+        if (lawyerName) {
+            filter = {
+                limit: limit,
+                filters: [
+                    {
+                        stateInArabic: state,
+                        nameInFrench: { $regex: `${lawyerName}` },
+                    },
+                    {
+                        stateInArabic: state,
+                        nameInArabic: { $regex: `${lawyerName}` },
+                    },
+                ],
+            }
+        }
+        let res = await getLawyersByFilter(filter)
+        setLawerList(res.data.lawyers)
+        lawyerName
+        ? navigate(`/محامون/${state}/${lawyerName}`)
+        : navigate(`/محامون/${state}`)
     }
 
     useEffect(() => {
@@ -68,18 +98,17 @@ export default function Lawyers() {
                     filters: [
                         {
                             stateInArabic: params.state,
-                            nameInFrench: { $regex: `^${params.name}` },
+                            nameInFrench: { $regex: `${params.name}` },
                         },
                         {
                             stateInArabic: params.state,
-                            nameInArabic: { $regex: `^${params.name}` },
+                            nameInArabic: { $regex: `${params.name}` },
                         },
                     ],
                 }
             }
             console.log(filter)
             let res = await getLawyersByFilter(filter)
-            console.log('hani hneeeeeeeeeeee')
             setLawerList(res.data.lawyers)
         }
         params.state ? byFilter() : allLawyers()
@@ -116,16 +145,21 @@ export default function Lawyers() {
                             <div id="custom-search-input">
                                 <div class="search_bar_list">
                                     <input
+                                        
                                         type="text"
                                         class="form-control"
                                         name="key"
+                                        value={params.name}
                                         placeholder="بحث"
-                                        value=""
                                         id="searchKey"
+                                        onChange={(e) => {
+                                            console.log(e.target.value)
+                                            setlawyerName(e.target.value)
+                                        }}
                                     />
                                 </div>
                             </div>
-                            <div id="custom-search-input">
+                            {/* <div id="custom-search-input">
                                 <div class="input-group">
                                     <select
                                         name="tribunal"
@@ -143,7 +177,7 @@ export default function Lawyers() {
                                         <option value="التعقيب">التعقيب</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> */}
                             <div id="custom-search-input">
                                 <div class="input-group">
                                     <select
@@ -158,11 +192,11 @@ export default function Lawyers() {
                                         <option value="" selected disabled>
                                             الولاية
                                         </option>
-                                        {/* {!filter ? null : (
-                                            <option selected value={filter}>
-                                                {filter}
+                                        {!state ? null : (
+                                            <option selected value={state}>
+                                                {state}
                                             </option>
-                                        )} */}
+                                        )}
                                         <option value="تونس">تونس</option>
                                         <option value="أريانة">أريانة</option>
                                         <option value="بن عروس">بن عروس</option>
@@ -192,16 +226,16 @@ export default function Lawyers() {
                                         <option value="زغوان">زغوان</option>
                                         <option value="قبلي">قبلي</option>
                                     </select>
-                                    <select
+                                    {/* <select
                                         name="delegation"
                                         id="DelegationAr"
                                         class="search-drop-avo"
-                                    ></select>
+                                    ></select> */}
                                     <input
                                         type="submit"
                                         class="btn_search in"
                                         value="بحث"
-                                        // onClick={searchHandler}
+                                        onClick={search}
                                     />
                                 </div>
                             </div>
