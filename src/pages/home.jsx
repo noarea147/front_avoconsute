@@ -3,8 +3,11 @@ import PostHome from '../shared/component/home_post'
 import QuestionHome from '../shared/component/home_question'
 import { useBlogContext } from '../context/blog_context'
 import { useSearchContext } from '../context/search_context'
+import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function Home() {
+    const navigate = useNavigate()
     const { getBlogs, getQuestion } = useBlogContext()
     const { search } = useSearchContext()
     const [limit, setLimit] = useState(3)
@@ -12,26 +15,36 @@ export default function Home() {
     const [questionList, setQuestionList] = useState([])
     const [state, setState] = useState()
     const [name, setName] = useState()
+    const [homeLawyerList, setHomeLawyerList] = useState([])
 
-    async function searchWithMultipleParams() {
-        const { data } = await search({
-            filters: [
-                {
-                    stateInArabic: state,
-                },
-                {
-                    nameInArabic: name,
-                    stateInArabic: state,
-                },
-
-                {
-                    nameInFrench: name,
-                    stateInArabic: state,
-                },
-            ],
-        })
-        setBlogList(data.data)
+    function handlerSearch() {
+        state
+            ? navigate('محامون/' + state, {
+                  homestate: state,
+                  homelawyerlist: homeLawyerList,
+              })
+            : alert('لم يتم تحديدالولاية المحامي')
     }
+
+    // async function searchWithMultipleParams() {
+    //     const { data } = await search({
+    //         filters: [
+    //             {
+    //                 stateInArabic: state,
+    //             },
+    //             {
+    //                 nameInArabic: name,
+    //                 stateInArabic: state,
+    //             },
+
+    //             {
+    //                 nameInFrench: name,
+    //                 stateInArabic: state,
+    //             },
+    //         ],
+    //     })
+    //     setHomeLawyerList(data)
+    // }
     useEffect(() => {
         async function initBlogs() {
             let res = await getBlogs({
@@ -59,58 +72,55 @@ export default function Home() {
                         <p class="fadeInUp animated">
                             ابحث واعثر على محام في تونس واحجز موعدك عبر الإنترنت
                         </p>
-                        <form method="POST" action="/محامون/">
-                            <div id="custom-search-input">
-                                <div class="input-group">
-                                    <select
-                                        name="Gouvernorat"
-                                        id="GouvernoratAr"
-                                        class="search-drop"
-                                        value=""
-                                        onChange={(e) => {
-                                            console.log(e.target.value)
-                                            setState(e.target.value)
-                                        }}
-                                        required
-                                    >
-                                        <option value="">الولاية</option>
-                                        <option value="تونس">تونس</option>
-                                        <option value="أريانة">أريانة</option>
-                                        <option value="بن عروس">بن عروس</option>
-                                        <option value="منوبة">منوبة</option>
-                                        <option value="سوسة">سوسة</option>
-                                        <option value="صفاقس">صفاقس</option>
-                                        <option value="قابس">قابس</option>
-                                        <option value="مدنين">مدنين</option>
-                                        <option value="المهدية">المهدية</option>
-                                        <option value="باجة">باجة</option>
-                                        <option value="بنزرت">بنزرت</option>
-                                        <option value="قفصة">قفصة</option>
-                                        <option value="جندوبة">جندوبة</option>
-                                        <option value="القيروان">
-                                            القيروان
-                                        </option>
-                                        <option value="القصرين">القصرين</option>
-                                        <option value="الكاف">الكاف</option>
-                                        <option value="منستير">منستير</option>
-                                        <option value="نابل">نابل</option>
-                                        <option value="سيدي بوزيد">
-                                            سيدي بوزيد
-                                        </option>
-                                        <option value="سليانة">سليانة</option>
-                                        <option value="تطاوين">تطاوين</option>
-                                        <option value="توزر">توزر</option>
-                                        <option value="زغوان">زغوان</option>
-                                        <option value="قبلي">قبلي</option>
-                                    </select>
+                        {/* <form > */}
+                        <div id="custom-search-input">
+                            <div class="input-group">
+                                <select
+                                    name="Gouvernorat"
+                                    id="GouvernoratAr"
+                                    class="search-drop"
+                                    // value={optionsState}
+                                    onChange={(e) => {
+                                        setState(e.target.value)
+                                    }}
+                                    required
+                                >
+                                    <option value="">اختر الولاية </option>
+                                    <option value="تونس">تونس</option>
+                                    <option value="أريانة">أريانة</option>
+                                    <option value="بن عروس">بن عروس</option>
+                                    <option value="منوبة">منوبة</option>
+                                    <option value="سوسة">سوسة</option>
+                                    <option value="صفاقس">صفاقس</option>
+                                    <option value="قابس">قابس</option>
+                                    <option value="مدنين">مدنين</option>
+                                    <option value="المهدية">المهدية</option>
+                                    <option value="باجة">باجة</option>
+                                    <option value="بنزرت">بنزرت</option>
+                                    <option value="قفصة">قفصة</option>
+                                    <option value="جندوبة">جندوبة</option>
+                                    <option value="القيروان">القيروان</option>
+                                    <option value="القصرين">القصرين</option>
+                                    <option value="الكاف">الكاف</option>
+                                    <option value="منستير">منستير</option>
+                                    <option value="نابل">نابل</option>
+                                    <option value="سيدي بوزيد">
+                                        سيدي بوزيد
+                                    </option>
+                                    <option value="سليانة">سليانة</option>
+                                    <option value="تطاوين">تطاوين</option>
+                                    <option value="توزر">توزر</option>
+                                    <option value="زغوان">زغوان</option>
+                                    <option value="قبلي">قبلي</option>
+                                </select>
 
-                                    <select
+                                {/* <select
                                         name="delegation"
                                         id="DelegationAr"
                                         class="search-drop"
-                                    ></select>
+                                    ></select> */}
 
-                                    <select name="Tribunal" class="search-drop">
+                                {/* <select name="Tribunal" class="search-drop">
                                         <option value="">المحكمة</option>
                                         <option value="الإبتدائية">
                                             الإبتدائية
@@ -119,25 +129,26 @@ export default function Home() {
                                             الاستئناف
                                         </option>
                                         <option value="التعقيب">التعقيب</option>
-                                    </select>
-                                    <input
-                                        name="key"
-                                        type="text"
-                                        class=" search-bar input-group"
-                                        onChange={(e) => {
-                                            console.log(e.target.value)
-                                            setName(e.target.value)
-                                        }}
-                                        placeholder=" إسم المحامي ..."
-                                    />
-                                    <input
-                                        type="submit"
-                                        class="btn_search"
-                                        value="بحث"
-                                    />
-                                </div>
+                                    </select> */}
+                                <input
+                                    name="key"
+                                    type="text"
+                                    class="search-bar input-group"
+                                    onChange={(e) => {
+                                        console.log(e.target.value)
+                                        setName(e.target.value)
+                                    }}
+                                    placeholder=" إسم المحامي"
+                                />
+                                <input
+                                    type="submit"
+                                    class="btn_search"
+                                    value="بحث"
+                                    onClick={handlerSearch}
+                                />
                             </div>
-                        </form>
+                        </div>
+                        {/* </form> */}
                     </div>
                 </div>
                 {/* <div id="app_section">

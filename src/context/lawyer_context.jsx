@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react'
 import axios_factory, { METHOD_POST } from '../helpers/axios_factory'
-import { GET_LAWYER, GET_LAWYER_BY_ID, GET_LAWYER_BY_FILTES } from '../helpers/Url_api_manger'
+import { GET_LAWYER, GET_LAWYER_BY_ID, GET_LAWYER_BY_FILTERS } from '../helpers/Url_api_manger'
 const LawyerContext = createContext()
 export function useLawyerContext() {
     return useContext(LawyerContext)
@@ -22,7 +22,7 @@ export default function LawyerProvider({ children }) {
     }
     async function getLawyersByFilter(data) {
         return await axios_factory({
-            url: GET_LAWYER_BY_FILTES,
+            url: GET_LAWYER_BY_FILTERS,
             method: METHOD_POST,
             data: data,
         })
