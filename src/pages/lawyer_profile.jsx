@@ -6,6 +6,12 @@ export default function LawyerProfile() {
     const { getLawyerById } = useLawyerContext()
     const [lawyer, setLawyer] = useState({})
     const { id } = useParams()
+    function dismissPopup() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+    function showPopup() {
+        document.getElementById("myModal").style.display = "block";
+    }
     useEffect(() => {
         async function fetchData() {
             let res = await getLawyerById({ id: id })
@@ -136,7 +142,7 @@ onat, onat tunisie, ordre des avocats, ordre national des avocats, الفرع ا
                                     <h3>هل تريد الإتصل ب NAME ؟</h3>
                                 </div>
                                 <div class="main">
-                                    <a class="btn_12 full-width">
+                                    <a class="btn_12 full-width" onClick={showPopup} >
                                         انقر لعرض رقم الهاتف
                                     </a>
                                     <br></br>
@@ -154,7 +160,7 @@ onat, onat tunisie, ordre des avocats, ordre national des avocats, الفرع ا
                                 </div>
                             </div>
                             <div id="myBtn2" class="btn_reserve_fixed">
-                                <a class="btn_12 full-width">
+                                <a class="btn_12 full-width" onClick={showPopup}>
                                     انقر لعرض رقم الهاتف
                                 </a>
                             </div>
@@ -165,19 +171,20 @@ onat, onat tunisie, ordre des avocats, ordre national des avocats, الفرع ا
                                 >
                                     <br></br>
                                     <center>
-                                        <strong>أرقام الهاتف</strong>
+                                        <strong>رقم الهاتف</strong>
                                     </center>
                                     <br></br>
                                     <center>
-                                        <p class="">الهاتف القار :</p>
+                                    {console.log(lawyer)}
+                                        <p class="">الهاتف : {lawyer.phoneNumber}</p>
                                     </center>
-                                    <br></br>
+                                    {/* <br></br>
                                     <center>
                                         <p class="">الهاتف الجوال :</p>
-                                    </center>
+                                    </center> */}
                                     <center>
-                                        <div class="text-center close">
-                                            <a class="btn_1 outline">اغلاق</a>
+                                        <div class="text-center close"onClick={dismissPopup}>
+                                            <a class="btn_1 outline" >اغلاق</a>
                                         </div>
                                     </center>
                                 </div>
