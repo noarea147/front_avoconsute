@@ -37,6 +37,24 @@ export default function App() {
                     }
                 />
                 <Route
+                    path="/fr"
+                    element={
+                        <SearchProvider>
+                            <BlogProvider>
+                                <Home />
+                            </BlogProvider>
+                        </SearchProvider>
+                    }
+                />
+                <Route
+                    path="Magazine-Juridique"
+                    element={
+                        <BlogProvider>
+                            <Blog />
+                        </BlogProvider>
+                    }
+                />
+                <Route
                     path={url_blog}
                     element={
                         <BlogProvider>
@@ -46,6 +64,14 @@ export default function App() {
                 />
                 <Route
                     path={url_blog + '/:title/:id'}
+                    element={
+                        <BlogProvider>
+                            <SingleBlog />
+                        </BlogProvider>
+                    }
+                />
+                <Route
+                    path={'/Magazine-Juridique/:title/:id'}
                     element={
                         <BlogProvider>
                             <SingleBlog />
@@ -62,7 +88,23 @@ export default function App() {
                     }
                 />
                 <Route
+                    path="Qestions-Reponses"
+                    element={
+                        <BlogProvider>
+                            <Question />
+                        </BlogProvider>
+                    }
+                />
+                <Route
                     path={url_question + '/:title/:id'}
+                    element={
+                        <BlogProvider>
+                            <SingleQuestion />
+                        </BlogProvider>
+                    }
+                />
+                <Route
+                    path={'/Qestions-Reponses/:title/:id'}
                     element={
                         <BlogProvider>
                             <SingleQuestion />
@@ -72,8 +114,19 @@ export default function App() {
                 <Route path={url_aboutus} element={<AboutUs />} />
                 <Route path={url_terms} element={<Terms />} />
                 <Route path={url_contactus} element={<ContactUs />} />
+                <Route path="/Qui-Somme-Nous" element={<AboutUs />} />
+                <Route path="/Confidentialite" element={<Terms />} />
+                <Route path="/Contactez-Nous" element={<ContactUs />} />
                 <Route
                     path={url_lawyer + '/:name/:id'}
+                    element={
+                        <LawyerProvider>
+                            <LawyerProfile />
+                        </LawyerProvider>
+                    }
+                />
+                <Route
+                    path={'/Avocat/:name/:id'}
                     element={
                         <LawyerProvider>
                             <LawyerProfile />
@@ -90,6 +143,14 @@ export default function App() {
                     }
                 />
                 <Route
+                    path={'Avocats/:state/:name'}
+                    element={
+                        <LawyerProvider>
+                            <Lawyers />
+                        </LawyerProvider>
+                    }
+                />
+                <Route
                     path={url_lawyers + '/:state'}
                     element={
                         <LawyerProvider>
@@ -98,7 +159,23 @@ export default function App() {
                     }
                 />
                 <Route
+                    path={'/Avocats/:state'}
+                    element={
+                        <LawyerProvider>
+                            <Lawyers />
+                        </LawyerProvider>
+                    }
+                />
+                <Route
                     path={url_lawyers}
+                    element={
+                        <LawyerProvider>
+                            <Lawyers />
+                        </LawyerProvider>
+                    }
+                />
+                <Route
+                    path={'/Avocats'}
                     element={
                         <LawyerProvider>
                             <Lawyers />

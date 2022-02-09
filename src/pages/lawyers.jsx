@@ -20,6 +20,9 @@ export default function Lawyers() {
                 {
                     stateInArabic: state,
                 },
+                {
+                    stateInFrench: state,
+                },
             ],
         }
         if (lawyerName) {
@@ -27,12 +30,20 @@ export default function Lawyers() {
                 limit: limit,
                 filters: [
                     {
-                        stateInArabic: state,
-                        nameInFrench: { $regex: `${lawyerName}` },
+                        stateInArabic: params.state,
+                        nameInFrench: { $regex: `${params.name}` },
                     },
                     {
-                        stateInArabic: state,
-                        nameInArabic: { $regex: `${lawyerName}` },
+                        stateInArabic: params.state,
+                        nameInArabic: { $regex: `${params.name}` },
+                    },
+                    {
+                        stateInFrench: params.state,
+                        nameInFrench: { $regex: `${params.name}` },
+                    },
+                    {
+                        stateInFrench: params.state,
+                        nameInArabic: { $regex: `${params.name}` },
                     },
                 ],
             }
@@ -49,6 +60,9 @@ export default function Lawyers() {
                 {
                     stateInArabic: state,
                 },
+                {
+                    stateInFrench: state,
+                },
             ],
         }
         if (lawyerName) {
@@ -56,12 +70,20 @@ export default function Lawyers() {
                 limit: limit,
                 filters: [
                     {
-                        stateInArabic: state,
-                        nameInFrench: { $regex: `${lawyerName}` },
+                        stateInArabic: params.state,
+                        nameInFrench: { $regex: `${params.name}` },
                     },
                     {
-                        stateInArabic: state,
-                        nameInArabic: { $regex: `${lawyerName}` },
+                        stateInArabic: params.state,
+                        nameInArabic: { $regex: `${params.name}` },
+                    },
+                    {
+                        stateInFrench: params.state,
+                        nameInFrench: { $regex: `${params.name}` },
+                    },
+                    {
+                        stateInFrench: params.state,
+                        nameInArabic: { $regex: `${params.name}` },
                     },
                 ],
             }
@@ -85,7 +107,10 @@ export default function Lawyers() {
                 limit: limit,
                 filters: [
                     {
-                        stateInArabic: params.state,
+                        stateInArabic: state,
+                    },
+                    {
+                        stateInFrench: state,
                     },
                 ],
             }
@@ -103,6 +128,14 @@ export default function Lawyers() {
                         },
                         {
                             stateInArabic: params.state,
+                            nameInArabic: { $regex: `${params.name}` },
+                        },
+                        {
+                            stateInFrench: params.state,
+                            nameInFrench: { $regex: `${params.name}` },
+                        },
+                        {
+                            stateInFrench: params.state,
                             nameInArabic: { $regex: `${params.name}` },
                         },
                     ],
