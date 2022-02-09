@@ -3,7 +3,7 @@ import Lawyer from '../shared/component/lawyer'
 import { useLawyerContext } from '../context/lawyer_context'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import {Helmet} from "react-helmet";
+import { Helmet } from 'react-helmet'
 export default function Lawyers() {
     const navigate = useNavigate()
     const { getLawyers, getLawyersByFilter } = useLawyerContext()
@@ -69,8 +69,8 @@ export default function Lawyers() {
         let res = await getLawyersByFilter(filter)
         setLawerList(res.data.lawyers)
         lawyerName
-        ? navigate(`/محامون/${state}/${lawyerName}`)
-        : navigate(`/محامون/${state}`)
+            ? navigate(`/محامون/${state}/${lawyerName}`)
+            : navigate(`/محامون/${state}`)
     }
 
     useEffect(() => {
@@ -117,7 +117,7 @@ export default function Lawyers() {
 
     return (
         <>
-        <Helmet>
+            <Helmet>
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta
                     name="viewport"
@@ -129,7 +129,7 @@ export default function Lawyers() {
                 />
                 <title>
                     AvoConsulte ابحث واعثر على أفضل محام في تونس - قائمة
-                    المحامين {params.state}
+                    المحامين {params.state ? params.state : 'بتونس'}
                 </title>
                 <meta
                     name="keywords"
@@ -170,14 +170,27 @@ onat, onat tunisie, ordre des avocats, ordre national des avocats, الفرع ا
                 />
                 <meta name="author" content="Avoconsulte" />{' '}
             </Helmet>
+            <div id="breadcrumb" dir="rtl">
+                <div class="container" dir="rtl">
+                    <ul>
+                        <li>
+                            <a href="/">الصفحة الرئيسية</a>
+                        </li>
+                        <li><a href="/محامون">محامون</a></li>
+                        <li>{state}</li>
+                    </ul>
+                    <br></br>
+                </div>
+            </div>
+
             <div>
-                <div id="results"></div>
+
                 <div class="container margin_120_95">
                     <div class="main_title_2">
                         <h1>
                             ارقام هواتف
                             <strong> محامين </strong>
-                            في {state}
+                            في {state ? state : 'تونس'}
                         </h1>
                         <p>
                             ابحث على أفضل المحامين في تونس واحجز موعدك عبر
@@ -199,7 +212,6 @@ onat, onat tunisie, ordre des avocats, ordre national des avocats, الفرع ا
                             <div id="custom-search-input">
                                 <div class="search_bar_list">
                                     <input
-                                        
                                         type="text"
                                         class="form-control"
                                         name="key"
@@ -243,9 +255,9 @@ onat, onat tunisie, ordre des avocats, ordre national des avocats, الفرع ا
                                         }}
                                         required
                                     >
-                                        <option value="" selected disabled>
+                                        {/* <option value="" selected disabled>
                                             الولاية
-                                        </option>
+                                        </option> */}
                                         {!state ? null : (
                                             <option selected value={state}>
                                                 {state}

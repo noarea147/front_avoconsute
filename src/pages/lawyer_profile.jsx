@@ -28,9 +28,8 @@ export default function LawyerProfile() {
                     name="description"
                     content="اعثر بسرعة على محامٍ بالقرب منك وحدد موعدًا مجانًا عبر الإنترنت ببضع نقرات - دليل المحامين التونسيين AvoConsulte.com"
                 />
-                <title>صفحة المحام 
-                {lawyer.nameInArabic}
-                     | {lawyer.stateInArabic} 
+                <title>{`صفحة المحامي ${lawyer.nameInArabic}`}
+                     | {` ${lawyer.stateInArabic}`}
                      - Avoconsulte
                 </title>
                 <meta
@@ -70,8 +69,21 @@ onat, onat tunisie, ordre des avocats, ordre national des avocats, الفرع ا
                     name="twitter:image"
                     content="https://www.avoconsulte.com/img/avoconsulte_com_logo.png"
                 />
-                <meta name="author" content="Avoconsulte" />{' '}
+                <meta name="author" content="Avoconsulte" />
             </Helmet>
+            <div id="breadcrumb" dir="rtl">
+                <div class="container" dir="rtl">
+                    <ul>
+                        <li>
+                            <a href="/">الصفحة الرئيسية</a>
+                        </li>
+                        <li><a href="/محامون">محامون</a></li>
+
+                        <li>{lawyer.nameInArabic}</li>
+                    </ul>
+                    <br></br>
+                </div>
+            </div>
             <div class="bg_color">
                 <div class="container margin_detail">
                     <div class="row single-page">
