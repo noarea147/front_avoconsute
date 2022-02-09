@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Post from '../shared/component/post'
 import { useBlogContext } from '../context/blog_context'
-import {Helmet} from "react-helmet";
+import { Helmet } from 'react-helmet'
 export default function Blog() {
     const { getBlogs } = useBlogContext()
     const [limit, setLimit] = useState(3)
@@ -19,7 +19,6 @@ export default function Blog() {
             let res = await getBlogs({
                 limit: limit,
             })
-            console.log(res.data.blogs)
 
             setBlogList(res.data.blogs)
         }
@@ -28,7 +27,7 @@ export default function Blog() {
 
     return (
         <>
-        <Helmet>
+            <Helmet>
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta
                     name="viewport"
@@ -39,7 +38,8 @@ export default function Blog() {
                     content="اعثر بسرعة على محامٍ بالقرب منك وحدد موعدًا مجانًا عبر الإنترنت ببضع نقرات - دليل المحامين التونسيين AvoConsulte.com"
                 />
                 <title>
-                    AvoConsulte ابحث واعثر على أفضل محام في تونس - المجلة القانونية
+                    AvoConsulte ابحث واعثر على أفضل محام في تونس - المجلة
+                    القانونية
                 </title>
                 <meta
                     name="keywords"
@@ -93,8 +93,8 @@ onat, onat tunisie, ordre des avocats, ordre national des avocats, الفرع ا
             </div>
             <div class="container" dir="rtl">
                 <div class="main_title">
-					<br></br>
-					<br></br>
+                    <br></br>
+                    <br></br>
                     <h1>
                         المجلة<strong>القانونية</strong>
                     </h1>
@@ -116,7 +116,7 @@ onat, onat tunisie, ordre des avocats, ordre national des avocats, الفرع ا
                         تحميل المزيد
                     </p>
                 </center>
-				<br></br>
+                <br></br>
                 {/* <aside class="col-lg-3">
                     <div class="widget"></div>
 

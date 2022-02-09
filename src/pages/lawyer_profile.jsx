@@ -15,7 +15,6 @@ export default function LawyerProfile() {
     useEffect(() => {
         async function fetchData() {
             let res = await getLawyerById({ id: id })
-            console.log(res)
             setLawyer(res.data.lawyer)
         }
         fetchData()
@@ -175,7 +174,6 @@ onat, onat tunisie, ordre des avocats, ordre national des avocats, الفرع ا
                                     </center>
                                     <br></br>
                                     <center>
-                                    {console.log(lawyer)}
                                         <p class="">الهاتف : {lawyer.phoneNumber}</p>
                                     </center>
                                     {/* <br></br>

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useBlogContext } from '../context/blog_context'
 import { useParams } from 'react-router-dom'
-import {Helmet} from "react-helmet";
+import { Helmet } from 'react-helmet'
 
 export default function SingleQuestion() {
     const { getQuestionById, getQuestion } = useBlogContext()
@@ -12,7 +12,6 @@ export default function SingleQuestion() {
     useEffect(() => {
         async function fetchData() {
             let res = await getQuestionById({ id: id })
-            console.log(res)
             setQuestion(res.data.question)
         }
         async function initQuestion() {
@@ -26,7 +25,7 @@ export default function SingleQuestion() {
     }, [])
     return (
         <>
-        <Helmet>
+            <Helmet>
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta
                     name="viewport"
@@ -37,7 +36,7 @@ export default function SingleQuestion() {
                     content="اعثر بسرعة على محامٍ بالقرب منك وحدد موعدًا مجانًا عبر الإنترنت ببضع نقرات - دليل المحامين التونسيين AvoConsulte.com"
                 />
                 <title>
-                    AvoConsulte ابحث واعثر على أفضل محام في تونس - 
+                    AvoConsulte ابحث واعثر على أفضل محام في تونس -
                     {question.title ? question.title : 'الأسئلة الشائعة'}
                 </title>
                 <meta
@@ -128,7 +127,9 @@ onat, onat tunisie, ordre des avocats, ordre national des avocats, الفرع ا
                                                       alt=""
                                                   />
                                                   <strong>
-                                                      {!answer.user ? "أفكونسلت" : answer.user}
+                                                      {!answer.user
+                                                          ? 'أفكونسلت'
+                                                          : answer.user}
                                                   </strong>
                                               </div>
                                               <p>{answer.text || null}</p>

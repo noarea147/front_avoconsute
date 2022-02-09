@@ -1,6 +1,5 @@
 export default function formatDate(date) {
   
-  console.log(typeof date);
     if (typeof date.getDate !== 'function') {
         date = new Date(parseInt(date));
     }

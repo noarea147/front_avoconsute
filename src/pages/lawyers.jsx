@@ -108,7 +108,6 @@ export default function Lawyers() {
                     ],
                 }
             }
-            console.log(filter)
             let res = await getLawyersByFilter(filter)
             setLawerList(res.data.lawyers)
         }
@@ -219,7 +218,6 @@ onat, onat tunisie, ordre des avocats, ordre national des avocats, الفرع ا
                                         placeholder="بحث"
                                         id="searchKey"
                                         onChange={(e) => {
-                                            console.log(e.target.value)
                                             setlawyerName(e.target.value)
                                         }}
                                     />

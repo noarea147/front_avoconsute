@@ -12,16 +12,12 @@ export default function SingleBlog() {
     useEffect(() => {
         async function fetchData() {
             let res = await getBlogsById({ id: id })
-            console.log(res)
             setBlog(res.data.blog)
-            console.log(res.data.blogs)
         }
         async function initBlogs() {
             let res = await getBlogs({
                 limit: limit,
             })
-            console.log(res.data.blogs)
-
             setBlogList(res.data.blogs)
         }
         fetchData()
@@ -42,7 +38,7 @@ export default function SingleBlog() {
                     content="اعثر بسرعة على محامٍ بالقرب منك وحدد موعدًا مجانًا عبر الإنترنت ببضع نقرات - دليل المحامين التونسيين AvoConsulte.com"
                 />
                 <title>
-                    AvoConsulte ابحث واعثر على أفضل محام في تونس - 
+                    AvoConsulte ابحث واعثر على أفضل محام في تونس -
                     {blog.title ? blog.title : 'الصفحة الرئيسية'}
                 </title>
                 <meta
